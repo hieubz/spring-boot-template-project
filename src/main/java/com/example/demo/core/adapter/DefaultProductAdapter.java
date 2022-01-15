@@ -27,4 +27,9 @@ public class DefaultProductAdapter implements ProductAdapter {
   public void insertNewProduct(Product product) {
     this.productRepository.save(this.mapper.toEntity(product));
   }
+
+  @Override
+  public Product loadProductDetails(Long id) {
+    return mapper.toModelV2(roProductRepository.getProductDetailsById(id));
+  }
 }

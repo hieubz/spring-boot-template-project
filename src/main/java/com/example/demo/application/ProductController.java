@@ -2,13 +2,11 @@ package com.example.demo.application;
 
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.response.NewProductResponse;
+import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/v1/products")
@@ -24,5 +22,10 @@ public class ProductController extends BaseController {
   public NewProductResponse addNewProduct(@RequestBody NewProductRequest request) {
     productService.insertNewProduct(request);
     return new NewProductResponse("ok");
+  }
+
+  @GetMapping(value = "/get_details/{id}")
+  public Product getProductDetails(@PathVariable Long id) {
+    return productService.loadProductDetails(id);
   }
 }
