@@ -16,8 +16,9 @@ We divided the project into 4 layers:
 - [x] Multiple DataSource Configuration
 - [x] Read/Write Splitting
 - [x] Caching with Redis
-- [ ] Caching Local
-- [ ] Swagger
+- [ ] Caching Local 
+- [ ] Multiple Cache Manager
+- [x] Swagger
 - [ ] MultiThread
 - [ ] Background Job
 - [ ] Token based Authentication
