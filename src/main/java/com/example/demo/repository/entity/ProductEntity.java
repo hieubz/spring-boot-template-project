@@ -14,7 +14,7 @@ import java.time.LocalDateTime;
 @Table(name = "products")
 @Getter
 @Setter
-public class ProductEntity {
+public class ProductEntity extends BaseEntity {
 
   @Id
   private long id;
