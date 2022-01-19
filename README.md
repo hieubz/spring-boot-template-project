@@ -12,6 +12,17 @@ We divided the project into 4 layers:
 
 ## Features
 
-- Basic REST API
-- Multiple DataSource Configuration
-- Read/Write Splitting
+- [x] Basic REST API
+- [x] Multiple DataSource Configuration
+- [x] Read/Write Splitting
+- [x] Caching with Redis
+- [ ] Caching Local
+- [ ] Swagger
+- [ ] MultiThread
+- [ ] Background Job
+- [ ] Token based Authentication
+- [ ] Authorization
+- [ ] Retry
+- [ ] MDC logging
+- [ ] Monitoring with Prometheus
+- [ ] Sentry
