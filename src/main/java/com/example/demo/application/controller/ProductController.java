@@ -1,9 +1,10 @@
-package com.example.demo.application;
+package com.example.demo.application.controller;
 
 import com.example.demo.application.request.NewProductRequest;
+import com.example.demo.application.response.FindProductResponse;
 import com.example.demo.application.response.NewProductResponse;
-import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
+import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +26,11 @@ public class ProductController extends BaseController {
   }
 
   @GetMapping(value = "/get_details/{id}")
-  public Product getProductDetails(@PathVariable Long id) {
-    return productService.loadProductDetails(id);
+  public FindProductResponse getProductDetails(@PathVariable Long id)
+      throws ProductNotFoundException {
+    return FindProductResponse.builder()
+        .product(productService.loadProductDetails(id))
+        .status(true)
+        .build();
   }
 }

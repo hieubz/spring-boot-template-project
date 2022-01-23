@@ -1,6 +1,7 @@
 package com.example.demo.core.adapter;
 
 import com.example.demo.core.domain.Product;
+import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import com.example.demo.infrastructure.mapper.ProductMapper;
 import com.example.demo.repository.primary.ProductRepository;
 import com.example.demo.repository.read_only.RoProductRepository;
@@ -9,6 +10,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Component("DefaultProductAdapter")
@@ -30,8 +32,10 @@ public class DefaultProductAdapter implements ProductAdapter {
   }
 
   @Override
-  @Cacheable(cacheNames = "productDetails")
-  public Product loadProductDetails(Long id) {
-    return mapper.toModelV2(roProductRepository.getProductDetailsById(id));
+  @Cacheable(cacheNames = "productDetails", unless = "#result == null")
+  public Product loadProductDetails(Long id) throws ProductNotFoundException {
+    Product product = mapper.toModelV2(roProductRepository.getProductDetailsById(id));
+    if (Objects.isNull(product)) throw new ProductNotFoundException("Product Not Found");
+    return product;
   }
 }

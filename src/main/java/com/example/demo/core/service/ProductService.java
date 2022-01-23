@@ -3,6 +3,7 @@ package com.example.demo.core.service;
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.core.adapter.ProductAdapter;
 import com.example.demo.core.domain.Product;
+import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
@@ -29,7 +30,7 @@ public class ProductService {
     return this.productAdapter.loadAllProducts();
   }
 
-  public Product loadProductDetails(Long id) {
+  public Product loadProductDetails(Long id) throws ProductNotFoundException {
     log.info("> ProductService.loadProductDetails id = {}", id);
     return this.productAdapter.loadProductDetails(id);
   }
