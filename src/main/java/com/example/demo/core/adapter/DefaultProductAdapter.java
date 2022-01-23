@@ -1,6 +1,7 @@
 package com.example.demo.core.adapter;
 
 import com.example.demo.core.domain.Product;
+import com.example.demo.infrastructure.config.CacheConfig;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import com.example.demo.infrastructure.mapper.ProductMapper;
 import com.example.demo.repository.primary.ProductRepository;
@@ -32,7 +33,10 @@ public class DefaultProductAdapter implements ProductAdapter {
   }
 
   @Override
-  @Cacheable(cacheNames = "productDetails", unless = "#result == null")
+  @Cacheable(
+      cacheNames = "productDetails",
+      unless = "#result == null",
+      cacheManager = CacheConfig.CACHE_REDIS)
   public Product loadProductDetails(Long id) throws ProductNotFoundException {
     Product product = mapper.toModelV2(roProductRepository.getProductDetailsById(id));
     if (Objects.isNull(product)) throw new ProductNotFoundException("Product Not Found");
