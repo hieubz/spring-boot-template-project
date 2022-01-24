@@ -19,12 +19,12 @@ import java.util.Set;
 @Order(1)
 public class TokenVerifyingFilter extends OncePerRequestFilter {
 
-  /** verify fixed tokens */
   private final String VERIFY_TOKEN_HEADER = "Verify-Token";
 
   @Value("${verified_tokens}")
   private Set<String> tokenSet;
 
+  /** verify fixed tokens */
   @Override
   protected void doFilterInternal(
       HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
