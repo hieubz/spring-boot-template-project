@@ -6,11 +6,14 @@ import com.example.demo.application.response.FindProductResponse;
 import com.example.demo.application.response.NewProductResponse;
 import com.example.demo.application.response.PriceCheckResponse;
 import com.example.demo.application.response.PriceCheckResult;
+import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
 import com.example.demo.infrastructure.exception.EmptyRequestException;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -59,5 +62,14 @@ public class ProductController extends BaseController {
         .product(productService.loadProductDetails(id))
         .status(true)
         .build();
+  }
+
+  @GetMapping(value = "/get-all")
+  public ResponseEntity<List<Product>> getProductByPrice(
+      @RequestParam(defaultValue = "0") Integer pageNo,
+      @RequestParam(defaultValue = "20") Integer pageSize,
+      @RequestParam(defaultValue = "id") String sortBy) {
+    List<Product> products = productService.loadAllProducts(pageNo, pageSize, sortBy);
+    return new ResponseEntity<>(products, HttpStatus.OK);
   }
 }

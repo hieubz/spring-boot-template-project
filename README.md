@@ -28,7 +28,8 @@ We divided the project into 4 layers:
 - [ ] Authorization
 - [ ] Retry
 - [ ] Monitoring with Prometheus
-- [ ] Sentry
+- [ ] Sentry Integration
+- [x] Pagination
 
 ## Setup:
 - Requirements: MySQL, Redis

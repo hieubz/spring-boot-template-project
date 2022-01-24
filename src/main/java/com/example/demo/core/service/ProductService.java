@@ -9,6 +9,9 @@ import com.example.demo.infrastructure.exception.EmptyRequestException;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -33,8 +36,9 @@ public class ProductService {
     this.productAdapter.insertNewProduct(product);
   }
 
-  public List<Product> loadAllProducts() {
-    return this.productAdapter.loadAllProducts();
+  public List<Product> loadAllProducts(Integer pageNo, Integer pageSize, String sortBy) {
+    Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+    return this.productAdapter.loadAllProducts(paging);
   }
 
   public Product loadProductDetails(Long id) throws ProductNotFoundException {
