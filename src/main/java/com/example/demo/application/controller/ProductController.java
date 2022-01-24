@@ -1,13 +1,20 @@
 package com.example.demo.application.controller;
 
 import com.example.demo.application.request.NewProductRequest;
+import com.example.demo.application.request.PriceCheckRequest;
 import com.example.demo.application.response.FindProductResponse;
 import com.example.demo.application.response.NewProductResponse;
+import com.example.demo.application.response.PriceCheckResponse;
+import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.service.ProductService;
+import com.example.demo.infrastructure.exception.EmptyRequestException;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/v1/products")
@@ -23,6 +30,26 @@ public class ProductController extends BaseController {
   public NewProductResponse addNewProduct(@RequestBody NewProductRequest request) {
     productService.insertNewProduct(request);
     return new NewProductResponse("ok");
+  }
+
+  @PostMapping(
+      value = "/check-price-async",
+      consumes = {MediaType.APPLICATION_JSON_VALUE},
+      produces = {MediaType.APPLICATION_JSON_VALUE})
+  public PriceCheckResponse checkAsyncProductPrice(@RequestBody PriceCheckRequest request)
+      throws EmptyRequestException, ExecutionException, InterruptedException {
+    List<PriceCheckResult> results = productService.checkAsyncPrice(request);
+    return PriceCheckResponse.builder().results(results).msg("ok").status(true).build();
+  }
+
+  @PostMapping(
+      value = "/check-price",
+      consumes = {MediaType.APPLICATION_JSON_VALUE},
+      produces = {MediaType.APPLICATION_JSON_VALUE})
+  public PriceCheckResponse checkProductPrice(@RequestBody PriceCheckRequest request)
+      throws EmptyRequestException, InterruptedException {
+    List<PriceCheckResult> results = productService.checkPrice(request);
+    return PriceCheckResponse.builder().results(results).msg("ok").status(true).build();
   }
 
   @GetMapping(value = "/get_details/{id}")

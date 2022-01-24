@@ -1,9 +1,9 @@
 package com.example.demo.application.request;
 
-import lombok.Value;
+import lombok.Data;
 
-@Value
+@Data
 public class NewProductRequest {
-  String name;
-  Float price;
+  private String name;
+  private Float price;
 }
