@@ -28,12 +28,15 @@ We divided the project into 4 layers:
 - [ ] Authorization
 - [ ] Retry
 - [ ] Monitoring with Prometheus
-- [ ] Sentry Integration
+- [x] Sentry Integration
 - [x] Pagination
+- [ ] Distributed Transactions
+- [ ] REST client using OpenFeign
+- [ ] Event Handling
+- [ ] Kafka Producer/Consumer
 
 ## Setup:
-- Requirements: MySQL, Redis
-- Update your database config in **application.properties**
+- Run `docker-compose up -d` to start MySQL and Redis (or update your database config in **application.properties**)
 - Install [Redis Commander](https://github.com/joeferner/redis-commander) which will support you to check your Redis cache
 - Run `redis-commander --redis-db 10 --redis-password 123` (depends on your db/password config)
 
