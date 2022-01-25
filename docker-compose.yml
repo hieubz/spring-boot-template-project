@@ -1,0 +1,27 @@
+version: "3"
+
+services:
+  redis:
+    image: 'redis:6.0'
+    container_name: redis-demo
+    volumes:
+      - redis-data:/var/lib/redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+    ports:
+      - '6379:6379'
+
+  mysql:
+    image: mysql:5.7
+    container_name: mysql-demo
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: 123
+      MYSQL_DATABASE: demo
+
+volumes:
+  mysql-data:
+  redis-data:
