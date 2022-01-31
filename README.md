@@ -29,11 +29,11 @@ We divided the project into 4 layers:
 - [ ] Monitoring with Prometheus
 - [x] Sentry Integration
 - [x] Pagination
-- [ ] Distributed Transactions
-- [ ] REST client using OpenFeign
-- [ ] Retry
-- [ ] Event Handling
+- [x] REST client using OpenFeign
+- [x] Retry
+- [x] Event Handling
 - [ ] Kafka Producer/Consumer
+- [ ] Distributed Transactions
 
 ## Setup:
 - Run `docker-compose up -d` to start MySQL and Redis (or update your database config in **application.properties**)
