@@ -65,7 +65,7 @@ public class ProductController extends BaseController {
   }
 
   @GetMapping(value = "/get-all")
-  public ResponseEntity<List<Product>> getProductByPrice(
+  public ResponseEntity<List<Product>> getProductByPaging(
       @RequestParam(defaultValue = "0") Integer pageNo,
       @RequestParam(defaultValue = "20") Integer pageSize,
       @RequestParam(defaultValue = "id") String sortBy) {
