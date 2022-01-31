@@ -5,10 +5,14 @@ import com.example.demo.core.domain.Product;
 import com.example.demo.infrastructure.config.CacheConfig;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
 import com.example.demo.infrastructure.mapper.ProductMapper;
-import com.example.demo.repository.entity.ProductEntity;
-import com.example.demo.repository.primary.ProductRepository;
-import com.example.demo.repository.read_only.RoProductRepository;
+import com.example.demo.infrastructure.shared.AppConstants;
+import com.example.demo.repository.mongo.entity.DemoLog;
+import com.example.demo.repository.mongo.primary.DemoLogRepository;
+import com.example.demo.repository.mysql.entity.ProductEntity;
+import com.example.demo.repository.mysql.primary.ProductRepository;
+import com.example.demo.repository.mysql.read_only.RoProductRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.MDC;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Pageable;
 import org.springframework.scheduling.annotation.Async;
@@ -27,10 +31,13 @@ public class DefaultProductAdapter implements ProductAdapter {
 
   private final ProductRepository productRepository;
   private final RoProductRepository roProductRepository;
+  private final DemoLogRepository logRepository;
   private final ProductMapper mapper;
 
   @Override
   public List<Product> loadAllProducts(Pageable paging) {
+    DemoLog requestLog = DemoLog.builder().requestId(MDC.get(AppConstants.REQUEST_ID_KEY)).build();
+    logRepository.insert(requestLog);
     return roProductRepository.findAll(paging).stream()
         .map(mapper::toModel)
         .collect(Collectors.toList());

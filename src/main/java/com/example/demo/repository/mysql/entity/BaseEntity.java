@@ -1,4 +1,4 @@
-package com.example.demo.repository.entity;
+package com.example.demo.repository.mysql.entity;
 
 import java.io.Serializable;
 

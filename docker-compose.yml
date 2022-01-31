@@ -4,12 +4,12 @@ services:
   redis:
     image: 'redis:6.0'
     container_name: redis-demo
+    ports:
+      - '6379:6379'
     volumes:
       - redis-data:/var/lib/redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
-    ports:
-      - '6379:6379'
 
   mysql:
     image: mysql:5.7
@@ -21,6 +21,15 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: 123
       MYSQL_DATABASE: demo
+
+  mongo:
+    image: mongo
+    container_name: mongo-demo
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
 
 volumes:
   mysql-data:

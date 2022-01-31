@@ -24,14 +24,14 @@ We divided the project into 4 layers:
 - [ ] Session based Authentication
 - [x] Swagger
 - [x] MultiThread
-- [ ] Background Job
+- [x] Background Job
 - [ ] Authorization
-- [ ] Retry
 - [ ] Monitoring with Prometheus
 - [x] Sentry Integration
 - [x] Pagination
 - [ ] Distributed Transactions
 - [ ] REST client using OpenFeign
+- [ ] Retry
 - [ ] Event Handling
 - [ ] Kafka Producer/Consumer
 

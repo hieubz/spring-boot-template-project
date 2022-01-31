@@ -1,7 +1,7 @@
-package com.example.demo.repository.read_only;
+package com.example.demo.repository.mysql.read_only;
 
-import com.example.demo.repository.entity.ProductEntity;
-import com.example.demo.repository.vo.ProductDetailVO;
+import com.example.demo.repository.mysql.entity.ProductEntity;
+import com.example.demo.repository.mysql.vo.ProductDetailVO;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;

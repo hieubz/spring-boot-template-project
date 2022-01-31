@@ -21,10 +21,10 @@ import javax.sql.DataSource;
 @EnableJpaRepositories(
     entityManagerFactoryRef = "DemoEntityManagerFactory",
     transactionManagerRef = "DemoTransactionManager",
-    basePackages = {"com.example.demo.repository.primary"})
+    basePackages = {"com.example.demo.repository.mysql.primary"})
 public class DemoDataSourceConfig extends DataSourceConfig {
   public static final String PERSISTENCE_UNIT_NAME = "Demo";
-  public static final String MODEL_PACKAGE = "com.example.demo.repository.entity";
+  public static final String MODEL_PACKAGE = "com.example.demo.repository.mysql.entity";
 
   @Bean(name = "DemoDataSource")
   @Primary

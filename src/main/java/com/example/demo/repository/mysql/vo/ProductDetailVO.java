@@ -1,4 +1,4 @@
-package com.example.demo.repository.vo;
+package com.example.demo.repository.mysql.vo;
 
 public interface ProductDetailVO {
 
