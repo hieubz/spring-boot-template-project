@@ -8,9 +8,13 @@ import com.example.demo.application.response.PriceCheckResponse;
 import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
+import com.example.demo.infrastructure.events.NewProductEvent;
 import com.example.demo.infrastructure.exception.EmptyRequestException;
 import com.example.demo.infrastructure.exception.ProductNotFoundException;
+import com.example.demo.infrastructure.shared.AppConstants;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.MDC;
+import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +29,7 @@ import java.util.concurrent.ExecutionException;
 public class ProductController extends BaseController {
 
   private final ProductService productService;
+  private final ApplicationEventPublisher applicationEventPublisher;
 
   @PostMapping(
       value = "/add",
@@ -32,6 +37,8 @@ public class ProductController extends BaseController {
       produces = {MediaType.APPLICATION_JSON_VALUE})
   public NewProductResponse addNewProduct(@RequestBody NewProductRequest request) {
     productService.insertNewProduct(request);
+    applicationEventPublisher.publishEvent(
+        new NewProductEvent(this, MDC.get(AppConstants.REQUEST_ID_KEY), request));
     return new NewProductResponse("ok");
   }
 
