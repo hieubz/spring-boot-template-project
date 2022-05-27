@@ -1,4 +1,4 @@
-# Spring Boot - Base Backend Project
+# Spring Boot Based Backend Project
 
 built by SonPM, DatDD, [phamduyhieu.com](https://phamduyhieu.com)
 
