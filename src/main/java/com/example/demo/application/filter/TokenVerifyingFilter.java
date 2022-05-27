@@ -52,4 +52,9 @@ public class TokenVerifyingFilter extends OncePerRequestFilter {
   private Optional<String> getRequestToken(HttpServletRequest request) {
     return Optional.ofNullable(request.getHeader(VERIFY_TOKEN_HEADER));
   }
+
+  @Override
+  protected boolean shouldNotFilter(HttpServletRequest request) throws ServletException {
+    return !request.getRequestURI().startsWith("/api");
+  }
 }
