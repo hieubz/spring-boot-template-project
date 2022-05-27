@@ -18,7 +18,7 @@ import org.springframework.data.mongodb.core.mapping.MongoMappingContext;
 import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @Configuration
-@EnableMongoRepositories(basePackages = "com.example.demo.repository.mongo.primary")
+@EnableMongoRepositories(basePackages = "com.example.demo.infrastructure.repository.mongo.primary")
 @EnableMongoAuditing
 public class DemoMongoConfig {
 
