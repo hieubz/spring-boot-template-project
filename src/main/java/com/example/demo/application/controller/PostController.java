@@ -3,7 +3,7 @@ package com.example.demo.application.controller;
 import com.example.demo.application.response.PostResponse;
 import com.example.demo.core.domain.Post;
 import com.example.demo.core.service.PostService;
-import com.example.demo.infrastructure.exception.PostNotFoundException;
+import com.example.demo.shared.exception.PostNotFoundException;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;

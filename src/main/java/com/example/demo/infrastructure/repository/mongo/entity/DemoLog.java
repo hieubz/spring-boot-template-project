@@ -1,6 +1,6 @@
-package com.example.demo.repository.mongo.entity;
+package com.example.demo.infrastructure.repository.mongo.entity;
 
-import com.example.demo.infrastructure.shared.AppConstants;
+import com.example.demo.shared.constants.AppConstants;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.Builder;

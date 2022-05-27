@@ -1,7 +1,7 @@
 package com.example.demo.core.service;
 
 import com.example.demo.core.domain.Post;
-import com.example.demo.infrastructure.exception.PostNotFoundException;
+import com.example.demo.shared.exception.PostNotFoundException;
 import com.example.demo.infrastructure.rest_client.DemoRestClient;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;

@@ -1,7 +1,7 @@
 package com.example.demo.infrastructure.events;
 
-import com.example.demo.repository.mongo.entity.DemoLog;
-import com.example.demo.repository.mongo.primary.DemoLogRepository;
+import com.example.demo.infrastructure.repository.mongo.entity.DemoLog;
+import com.example.demo.infrastructure.repository.mongo.primary.DemoLogRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ApplicationListener;

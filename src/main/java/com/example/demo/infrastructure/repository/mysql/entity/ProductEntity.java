@@ -1,4 +1,4 @@
-package com.example.demo.repository.mysql.entity;
+package com.example.demo.infrastructure.repository.mysql.entity;
 
 import lombok.Getter;
 import lombok.Setter;

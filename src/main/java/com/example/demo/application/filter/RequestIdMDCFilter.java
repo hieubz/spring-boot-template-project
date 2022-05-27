@@ -1,6 +1,6 @@
 package com.example.demo.application.filter;
 
-import com.example.demo.infrastructure.shared.AppConstants;
+import com.example.demo.shared.constants.AppConstants;
 import org.slf4j.MDC;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;

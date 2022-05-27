@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.exception;
+package com.example.demo.shared.exception;
 
 public class PostNotFoundException extends BaseException {
 

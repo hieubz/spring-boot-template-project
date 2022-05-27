@@ -1,6 +1,6 @@
-package com.example.demo.repository.mysql.primary;
+package com.example.demo.infrastructure.repository.mysql.primary;
 
-import com.example.demo.repository.mysql.entity.ProductEntity;
+import com.example.demo.infrastructure.repository.mysql.entity.ProductEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;

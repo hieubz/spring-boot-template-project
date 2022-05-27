@@ -1,4 +1,4 @@
-package com.example.demo.infrastructure.shared;
+package com.example.demo.shared.constants;
 
 public final class AppConstants {
 
