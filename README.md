@@ -18,23 +18,25 @@ We divided the project into 4 layers:
 - [x] Multiple DataSource Configuration
 - [x] Read/Write Splitting
 - [x] Caching with Redis
-- [x] Caching Local
+- [x] Caching Local with Caffeine
 - [x] Multiple Cache Manager
 - [x] MDC logging
 - [x] Exception Handling
-- [x] Token based Authentication
+- [x] Fixed Token Authentication
+- [ ] JWT Authentication
 - [ ] Session based Authentication
-- [x] Swagger
-- [x] MultiThread
-- [x] Background Job
 - [ ] Authorization
+- [x] Swagger
+- [x] Background Job
 - [ ] Monitoring with Prometheus
 - [x] Sentry Integration
 - [x] Pagination
 - [x] REST client using OpenFeign
 - [x] Retry
 - [x] Event Handling
-- [ ] Kafka Producer/Consumer
+- [ ] Kafka Producer/Consumer (Json, Avro)
+- [x] MultiThread
+- [ ] Race Condition Handling
 - [ ] Distributed Transactions
 
 ## Setup:
