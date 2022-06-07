@@ -23,7 +23,7 @@ We divided the project into 4 layers:
 - [x] MDC logging
 - [x] Exception Handling
 - [x] Fixed Token Authentication
-- [ ] JWT Authentication
+- [x] JWT Authentication
 - [ ] Session based Authentication
 - [ ] Authorization
 - [x] Swagger
