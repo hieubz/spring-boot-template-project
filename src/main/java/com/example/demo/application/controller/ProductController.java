@@ -9,9 +9,9 @@ import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
 import com.example.demo.infrastructure.events.NewProductEvent;
+import com.example.demo.shared.constants.AppConstants;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.ProductNotFoundException;
-import com.example.demo.shared.constants.AppConstants;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.context.ApplicationEventPublisher;
@@ -24,7 +24,7 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 
 @RestController
-@RequestMapping("/v1/products")
+@RequestMapping("/api/v1/products")
 @RequiredArgsConstructor
 public class ProductController extends BaseController {
 
@@ -49,7 +49,7 @@ public class ProductController extends BaseController {
   public PriceCheckResponse checkAsyncProductPrice(@RequestBody PriceCheckRequest request)
       throws EmptyRequestException, ExecutionException, InterruptedException {
     List<PriceCheckResult> results = productService.checkAsyncPrice(request);
-    return PriceCheckResponse.builder().results(results).msg("ok").status(true).build();
+    return PriceCheckResponse.builder().results(results).message("ok").success(true).build();
   }
 
   @PostMapping(
@@ -59,7 +59,7 @@ public class ProductController extends BaseController {
   public PriceCheckResponse checkProductPrice(@RequestBody PriceCheckRequest request)
       throws EmptyRequestException, InterruptedException {
     List<PriceCheckResult> results = productService.checkPrice(request);
-    return PriceCheckResponse.builder().results(results).msg("ok").status(true).build();
+    return PriceCheckResponse.builder().results(results).message("ok").success(true).build();
   }
 
   @GetMapping(value = "/get_details/{id}")
@@ -67,7 +67,7 @@ public class ProductController extends BaseController {
       throws ProductNotFoundException {
     return FindProductResponse.builder()
         .product(productService.loadProductDetails(id))
-        .status(true)
+        .success(true)
         .build();
   }
 

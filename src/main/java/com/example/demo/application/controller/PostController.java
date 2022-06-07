@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/v1/posts")
+@RequestMapping("/api/v1/posts")
 @RequiredArgsConstructor
 public class PostController extends BaseController {
 
@@ -19,6 +19,6 @@ public class PostController extends BaseController {
   @GetMapping(value = "/get-last")
   public PostResponse getLastPost() throws PostNotFoundException {
     Post post = postService.getLastPost();
-    return PostResponse.builder().post(post).status(true).build();
+    return PostResponse.builder().post(post).success(true).build();
   }
 }
