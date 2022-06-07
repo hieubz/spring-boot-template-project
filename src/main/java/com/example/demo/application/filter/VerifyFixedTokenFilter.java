@@ -1,9 +1,14 @@
 package com.example.demo.application.filter;
 
+import com.example.demo.core.service.UserService;
+import com.example.demo.infrastructure.config.auth.CustomUserDetails;
+import com.example.demo.shared.constants.AppConstants;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.annotation.Order;
-import org.springframework.stereotype.Component;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import javax.servlet.FilterChain;
@@ -14,15 +19,13 @@ import java.io.IOException;
 import java.util.Optional;
 import java.util.Set;
 
-@Component
 @Slf4j
-@Order(1)
-public class TokenVerifyingFilter extends OncePerRequestFilter {
-
-  private final String VERIFY_TOKEN_HEADER = "Verify-Token";
+public class VerifyFixedTokenFilter extends OncePerRequestFilter {
 
   @Value("${verified_tokens}")
   private Set<String> tokenSet;
+
+  @Autowired private UserService userService;
 
   /** verify fixed tokens */
   @Override
@@ -32,13 +35,17 @@ public class TokenVerifyingFilter extends OncePerRequestFilter {
 
     try {
       if (verifyToken(getRequestToken(request))) {
-        filterChain.doFilter(request, response);
-      } else {
-        response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+        CustomUserDetails user = userService.loadDefaultUserForFixedTokenAuth();
+        UsernamePasswordAuthenticationToken authentication =
+            new UsernamePasswordAuthenticationToken(user, null, user.getAuthorities());
+        authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+        SecurityContextHolder.getContext().setAuthentication(authentication);
       }
     } catch (Exception e) {
-      log.error("Invalid token", e);
+      log.error("Invalid fixed token", e);
     }
+
+    filterChain.doFilter(request, response);
   }
 
   private boolean verifyToken(Optional<String> token) {
@@ -50,7 +57,7 @@ public class TokenVerifyingFilter extends OncePerRequestFilter {
   }
 
   private Optional<String> getRequestToken(HttpServletRequest request) {
-    return Optional.ofNullable(request.getHeader(VERIFY_TOKEN_HEADER));
+    return Optional.ofNullable(request.getHeader(AppConstants.FIXED_TOKEN_HEADER));
   }
 
   @Override
