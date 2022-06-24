@@ -28,7 +28,7 @@ We divided the project into 4 layers:
 - [ ] Authorization
 - [x] Swagger
 - [x] Background Job
-- [ ] Monitoring with Prometheus
+- [x] Monitoring with Prometheus
 - [x] Sentry Integration
 - [x] Pagination
 - [x] REST client using OpenFeign
