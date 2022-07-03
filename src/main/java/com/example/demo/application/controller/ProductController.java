@@ -12,6 +12,9 @@ import com.example.demo.infrastructure.events.NewProductEvent;
 import com.example.demo.shared.constants.AppConstants;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.ProductNotFoundException;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.context.ApplicationEventPublisher;
@@ -25,6 +28,7 @@ import java.util.concurrent.ExecutionException;
 
 @RestController
 @RequestMapping("/api/v1/products")
+@Tag(name = "Product Controller")
 @RequiredArgsConstructor
 public class ProductController extends BaseController {
 
@@ -35,6 +39,11 @@ public class ProductController extends BaseController {
       value = "/add",
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
   public NewProductResponse addNewProduct(@RequestBody NewProductRequest request) {
     productService.insertNewProduct(request);
     applicationEventPublisher.publishEvent(
@@ -46,6 +55,11 @@ public class ProductController extends BaseController {
       value = "/check-price-async",
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
   public PriceCheckResponse checkAsyncProductPrice(@RequestBody PriceCheckRequest request)
       throws EmptyRequestException, ExecutionException, InterruptedException {
     List<PriceCheckResult> results = productService.checkAsyncPrice(request);
@@ -56,6 +70,11 @@ public class ProductController extends BaseController {
       value = "/check-price",
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
   public PriceCheckResponse checkProductPrice(@RequestBody PriceCheckRequest request)
       throws EmptyRequestException, InterruptedException {
     List<PriceCheckResult> results = productService.checkPrice(request);
@@ -63,6 +82,11 @@ public class ProductController extends BaseController {
   }
 
   @GetMapping(value = "/get_details/{id}")
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
   public FindProductResponse getProductDetails(@PathVariable Long id)
       throws ProductNotFoundException {
     return FindProductResponse.builder()
@@ -72,6 +96,11 @@ public class ProductController extends BaseController {
   }
 
   @GetMapping(value = "/get-all")
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
   public ResponseEntity<List<Product>> getProductByPaging(
       @RequestParam(defaultValue = "0") Integer pageNo,
       @RequestParam(defaultValue = "20") Integer pageSize,

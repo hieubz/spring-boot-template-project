@@ -45,5 +45,5 @@ We divided the project into 4 layers:
 - Run `redis-commander --redis-db 10 --redis-password 123` (depends on your db/password config)
 
 ## Notes:
-- Check your swagger: http://localhost:8080/swagger-ui.html#/
+- Check your swagger: http://localhost:8080/swagger-ui/index.html#/
 - Redis Commander UI: http://127.0.0.1:8081
