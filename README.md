@@ -2,6 +2,9 @@
 
 built by SonPM, DatDD, [phamduyhieu.com](https://phamduyhieu.com)
 
+## Overview
+A project which contains _**common backend features**_ to help me or any junior Spring Boot developers can code faster.
+
 ## Architecture
 We divided the project into 4 layers:
 
