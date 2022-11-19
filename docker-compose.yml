@@ -1,4 +1,4 @@
-version: "3"
+version: "3.8"
 
 services:
   redis:
@@ -12,7 +12,7 @@ services:
       - ALLOW_EMPTY_PASSWORD=yes
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8.0
     container_name: mysql-demo
     ports:
       - "3306:3306"
