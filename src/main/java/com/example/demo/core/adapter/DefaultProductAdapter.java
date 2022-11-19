@@ -4,6 +4,7 @@ import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.infrastructure.config.CacheConfig;
 import com.example.demo.shared.exception.ProductNotFoundException;
+import com.example.demo.shared.mappers.BaseModelMapper;
 import com.example.demo.shared.mappers.ProductMapper;
 import com.example.demo.shared.constants.AppConstants;
 import com.example.demo.infrastructure.repository.mongo.entity.DemoLog;
@@ -38,14 +39,12 @@ public class DefaultProductAdapter implements ProductAdapter {
   public List<Product> loadAllProducts(Pageable paging) {
     DemoLog requestLog = DemoLog.builder().requestId(MDC.get(AppConstants.REQUEST_ID_KEY)).build();
     logRepository.insert(requestLog);
-    return roProductRepository.findAll(paging).stream()
-        .map(mapper::toModel)
-        .collect(Collectors.toList());
+    return BaseModelMapper.mapList(roProductRepository.findAll(paging).toList(), Product.class);
   }
 
   @Override
   public void insertNewProduct(Product product) {
-    this.productRepository.save(this.mapper.toEntity(product));
+    this.productRepository.save(BaseModelMapper.mapper(product, ProductEntity.class));
   }
 
   @Override
