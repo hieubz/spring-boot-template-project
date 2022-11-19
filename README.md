@@ -36,11 +36,12 @@ We divided the project into 4 layers:
 - [x] Event Handling
 - [ ] Kafka Producer/Consumer (Json, Avro)
 - [x] MultiThread
-- [ ] Race Condition Handling
+- [ ] Race Condition Handling (Redis Lock)
 - [ ] Distributed Transactions
 
 ## Setup:
 - Run `docker-compose up -d` to start MySQL and Redis (or update your database config in **application.properties**)
+- run _init-schema.sql_ to initialize your database.
 - Install [Redis Commander](https://github.com/joeferner/redis-commander) which will support you to check your Redis cache
 - Run `redis-commander --redis-db 10 --redis-password 123` (depends on your db/password config)
 
