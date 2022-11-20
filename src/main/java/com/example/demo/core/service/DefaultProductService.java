@@ -2,9 +2,14 @@ package com.example.demo.core.service;
 
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
+import com.example.demo.application.request.UpdatePriceRequest;
 import com.example.demo.application.response.PriceCheckResult;
+import com.example.demo.application.response.UpdatePriceResult;
 import com.example.demo.core.adapter.ProductAdapter;
 import com.example.demo.core.domain.Product;
+import com.example.demo.infrastructure.locks.ProductMongoLocker;
+import com.example.demo.infrastructure.locks.ProductRedisLocker;
+import com.example.demo.shared.exception.ConcurrentProcessingException;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.ProductNotFoundException;
 import lombok.RequiredArgsConstructor;
@@ -26,6 +31,8 @@ import java.util.concurrent.ExecutionException;
 public class DefaultProductService implements ProductService {
 
   private final ProductAdapter productAdapter;
+  private final ProductRedisLocker productRedisLocker;
+  private final ProductMongoLocker productMongoLocker;
 
   @Override
   public void insertNewProduct(NewProductRequest request) {
@@ -80,5 +87,33 @@ public class DefaultProductService implements ProductService {
       results.add(this.productAdapter.checkPrice(p));
     }
     return results;
+  }
+
+  @Override
+  public UpdatePriceResult updatePrice(UpdatePriceRequest req) {
+    boolean race = false;
+    try {
+      Product product = productAdapter.findById(req.getProductId());
+      if (product == null) {
+        return UpdatePriceResult.builder().status(false).msg("The product was not existed!").build();
+      }
+
+      productMongoLocker.lock(req.getProductId());
+      productAdapter.updatePrice(req.getProductId(), req.getPrice());
+      return UpdatePriceResult.builder().status(true).msg("ok").build();
+    } catch (ConcurrentProcessingException e) {
+      race = true;
+      log.info("> ConcurrentProcessingException {}", e.getMessage());
+      return UpdatePriceResult.builder()
+          .status(false)
+          .msg("The product price is updating by others")
+          .build();
+    } catch (Exception e) {
+      log.error("> Exception during price updates: ", e);
+      return UpdatePriceResult.builder().status(false).msg("Updating price unsuccessful!").build();
+    } finally {
+      // unlock except data race exception
+      if (!race) productMongoLocker.unlock(req.getProductId());
+    }
   }
 }

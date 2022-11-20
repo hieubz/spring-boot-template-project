@@ -3,15 +3,15 @@ package com.example.demo.core.adapter;
 import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.infrastructure.config.CacheConfig;
-import com.example.demo.shared.exception.ProductNotFoundException;
-import com.example.demo.shared.mappers.BaseModelMapper;
-import com.example.demo.shared.mappers.ProductMapper;
-import com.example.demo.shared.constants.AppConstants;
 import com.example.demo.infrastructure.repository.mongo.entity.DemoLog;
 import com.example.demo.infrastructure.repository.mongo.primary.DemoLogRepository;
 import com.example.demo.infrastructure.repository.mysql.entity.ProductEntity;
 import com.example.demo.infrastructure.repository.mysql.primary.ProductRepository;
 import com.example.demo.infrastructure.repository.mysql.read_only.RoProductRepository;
+import com.example.demo.shared.constants.AppConstants;
+import com.example.demo.shared.exception.ProductNotFoundException;
+import com.example.demo.shared.mappers.BaseModelMapper;
+import com.example.demo.shared.mappers.ProductMapper;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.cache.annotation.Cacheable;
@@ -24,7 +24,6 @@ import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
 @Component("DefaultProductAdapter")
 @RequiredArgsConstructor
@@ -82,5 +81,16 @@ public class DefaultProductAdapter implements ProductAdapter {
 
     TimeUnit.SECONDS.sleep(1); // simulate for doing smt
     return PriceCheckResult.builder().id(p.getId()).status(true).build();
+  }
+
+  @Override
+  public void updatePrice(long productId, float price) {
+    productRepository.updatePriceById(productId, price);
+  }
+
+  @Override
+  public Product findById(long id) {
+    Optional<ProductEntity> entity = roProductRepository.findById(id);
+    return entity.isEmpty() ? null : BaseModelMapper.mapper(entity.get(), Product.class);
   }
 }

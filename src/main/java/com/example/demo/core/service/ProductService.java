@@ -2,7 +2,9 @@ package com.example.demo.core.service;
 
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
+import com.example.demo.application.request.UpdatePriceRequest;
 import com.example.demo.application.response.PriceCheckResult;
+import com.example.demo.application.response.UpdatePriceResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.ProductNotFoundException;
@@ -23,4 +25,6 @@ public interface ProductService {
 
   List<PriceCheckResult> checkPrice(PriceCheckRequest request)
       throws EmptyRequestException, InterruptedException;
+
+  UpdatePriceResult updatePrice(UpdatePriceRequest request);
 }

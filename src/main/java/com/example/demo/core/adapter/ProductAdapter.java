@@ -18,4 +18,8 @@ public interface ProductAdapter {
   CompletableFuture<PriceCheckResult> checkAsyncPrice(Product product) throws InterruptedException;
 
   PriceCheckResult checkPrice(Product product) throws InterruptedException;
+
+  void updatePrice(long productId, float price);
+
+  Product findById(long productId);
 }

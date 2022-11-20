@@ -2,10 +2,8 @@ package com.example.demo.application.controller;
 
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
-import com.example.demo.application.response.FindProductResponse;
-import com.example.demo.application.response.NewProductResponse;
-import com.example.demo.application.response.PriceCheckResponse;
-import com.example.demo.application.response.PriceCheckResult;
+import com.example.demo.application.request.UpdatePriceRequest;
+import com.example.demo.application.response.*;
 import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
 import com.example.demo.infrastructure.events.NewProductEvent;
@@ -79,6 +77,20 @@ public class ProductController extends BaseController {
       throws EmptyRequestException, InterruptedException {
     List<PriceCheckResult> results = productService.checkPrice(request);
     return PriceCheckResponse.builder().results(results).message("ok").success(true).build();
+  }
+
+  @PostMapping(
+      value = "/update-price",
+      consumes = {MediaType.APPLICATION_JSON_VALUE},
+      produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
+  public BaseResponse updatePrice(@RequestBody UpdatePriceRequest request) throws Exception {
+    UpdatePriceResult result = productService.updatePrice(request);
+    return BaseResponse.builder().success(result.getStatus()).message(result.getMsg()).build();
   }
 
   @GetMapping(value = "/get_details/{id}")
