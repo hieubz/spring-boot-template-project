@@ -1,5 +1,6 @@
 package com.example.demo.core.adapter;
 
+import com.example.demo.application.request.GetAllProductRequest;
 import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.core.domain.Product;
 import com.example.demo.infrastructure.config.CacheConfig;
@@ -7,6 +8,7 @@ import com.example.demo.infrastructure.repository.mongo.entity.DemoLog;
 import com.example.demo.infrastructure.repository.mongo.primary.DemoLogRepository;
 import com.example.demo.infrastructure.repository.mysql.entity.ProductEntity;
 import com.example.demo.infrastructure.repository.mysql.primary.ProductRepository;
+import com.example.demo.infrastructure.repository.mysql.read_only.RoJdbcProductRepository;
 import com.example.demo.infrastructure.repository.mysql.read_only.RoProductRepository;
 import com.example.demo.shared.constants.AppConstants;
 import com.example.demo.shared.exception.ProductNotFoundException;
@@ -31,6 +33,7 @@ public class DefaultProductAdapter implements ProductAdapter {
 
   private final ProductRepository productRepository;
   private final RoProductRepository roProductRepository;
+  private final RoJdbcProductRepository roJdbcProductRepository;
   private final DemoLogRepository logRepository;
   private final ProductMapper mapper;
 
@@ -39,6 +42,11 @@ public class DefaultProductAdapter implements ProductAdapter {
     DemoLog requestLog = DemoLog.builder().requestId(MDC.get(AppConstants.REQUEST_ID_KEY)).build();
     logRepository.insert(requestLog);
     return BaseModelMapper.mapList(roProductRepository.findAll(paging).toList(), Product.class);
+  }
+
+  @Override
+  public List<Product> loadAllProductByFilter(GetAllProductRequest request) {
+    return BaseModelMapper.mapList(roJdbcProductRepository.findAllByCriteria(request), Product.class);
   }
 
   @Override

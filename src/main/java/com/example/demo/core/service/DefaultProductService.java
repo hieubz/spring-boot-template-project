@@ -1,5 +1,6 @@
 package com.example.demo.core.service;
 
+import com.example.demo.application.request.GetAllProductRequest;
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
 import com.example.demo.application.request.UpdatePriceRequest;
@@ -115,5 +116,10 @@ public class DefaultProductService implements ProductService {
       // unlock except data race exception
       if (!race) productMongoLocker.unlock(req.getProductId());
     }
+  }
+
+  @Override
+  public List<Product> loadAllProductByFilter(GetAllProductRequest request) {
+    return productAdapter.loadAllProductByFilter(request);
   }
 }

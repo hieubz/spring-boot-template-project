@@ -1,6 +1,6 @@
 # Spring Boot Based Backend Project
 
-built by SonPM, DatDD, [phamduyhieu.com](https://phamduyhieu.com)
+Thanks to my brothers **SonPM**, **DatDD**, **LinhPH** at GHTK.
 
 ## Overview
 A project which contains _**common backend features**_ to help me or any other Spring Boot developers can code faster.
@@ -21,7 +21,8 @@ And we have the code flow as shown below:
 ## Features
 
 - [x] Basic REST API
-- [x] MultiThread/Async
+- [x] MultiThread, Async
+- [x] Event Handling
 - [x] Race Condition Handling (Redis/MongoDB Lock)
 - [ ] Distributed Transactions
 - [x] Multiple DataSource Configuration
@@ -39,10 +40,10 @@ And we have the code flow as shown below:
 - [x] Background Job
 - [x] Monitoring with Prometheus
 - [x] Sentry Integration
+- [x] Spring JDBC, Spring JPA
 - [x] Pagination
 - [x] REST client using OpenFeign
 - [x] Retry
-- [x] Event Handling
 - [ ] Kafka Producer/Consumer (Json, Avro)
 
 ## Setup:

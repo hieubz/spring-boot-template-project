@@ -19,6 +19,8 @@ import java.io.Serializable;
 public class Product implements Serializable {
   private Long id;
   private String name;
+  private Integer categoryId;
+  private Integer status;
   private Float price;
   private String author;
   private Integer number;

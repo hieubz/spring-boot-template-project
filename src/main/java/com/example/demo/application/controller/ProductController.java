@@ -3,6 +3,7 @@ package com.example.demo.application.controller;
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
 import com.example.demo.application.request.UpdatePriceRequest;
+import com.example.demo.application.request.GetAllProductRequest;
 import com.example.demo.application.response.*;
 import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
@@ -119,5 +120,17 @@ public class ProductController extends BaseController {
       @RequestParam(defaultValue = "id") String sortBy) {
     List<Product> products = productService.loadAllProducts(pageNo, pageSize, sortBy);
     return new ResponseEntity<>(products, HttpStatus.OK);
+  }
+
+  @PostMapping(
+      value = "/get-all-v2",
+      produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+      name = AppConstants.FIXED_TOKEN_HEADER,
+      required = true,
+      in = ParameterIn.HEADER,
+      example = "39489c18-7b74-11ec-90d6-0242ac120003")
+  public ResponseEntity<List<Product>> getAllProductByFilter(@RequestBody GetAllProductRequest request) {
+    return new ResponseEntity<>(productService.loadAllProductByFilter(request), HttpStatus.OK);
   }
 }

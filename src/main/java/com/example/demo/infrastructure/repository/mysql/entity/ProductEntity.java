@@ -19,7 +19,11 @@ public class ProductEntity extends BaseEntity {
 
   private String name;
 
+  private Integer categoryId;
+
   private Float price;
+
+  private Integer status;
 
   @Column(columnDefinition = "TIMESTAMP DEFAULT CURRENT_TIMESTAMP")
   @CreationTimestamp

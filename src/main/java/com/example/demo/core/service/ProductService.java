@@ -1,5 +1,6 @@
 package com.example.demo.core.service;
 
+import com.example.demo.application.request.GetAllProductRequest;
 import com.example.demo.application.request.NewProductRequest;
 import com.example.demo.application.request.PriceCheckRequest;
 import com.example.demo.application.request.UpdatePriceRequest;
@@ -17,6 +18,8 @@ public interface ProductService {
   void insertNewProduct(NewProductRequest request);
 
   List<Product> loadAllProducts(Integer pageNo, Integer pageSize, String sortBy);
+
+  List<Product> loadAllProductByFilter(GetAllProductRequest request);
 
   Product loadProductDetails(Long id) throws ProductNotFoundException;
 
