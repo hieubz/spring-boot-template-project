@@ -1,6 +1,6 @@
 # Spring Boot Based Backend Project
 
-Thanks to my brothers **SonPM**, **DatDD**, **LinhPH** at GHTK.
+Thanks to my brothers **SonPM**, **DatDD**, **LinhPH**.
 
 ## Overview
 A project which contains _**common backend features**_ to help me or any other Spring Boot developers can code faster.
@@ -47,7 +47,7 @@ And we have the code flow as shown below:
 - [x] Race Condition Handling (Redis/MongoDB Lock)
 - [ ] Distributed Transactions
 - [ ] Kafka Producer/Consumer (Json, Avro)
-- [ ] Generate and send emails
+- [x] Generate and send emails
 
 #### Datasource
 - [x] Multiple DataSource Configuration
