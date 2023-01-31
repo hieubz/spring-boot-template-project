@@ -54,7 +54,7 @@ And we have the code flow as shown below:
 - [x] Read/Write Splitting
 
 #### Unit Test
-- [ ] Junit, Mockito common modules
+- [x] Unit Test common cases (with Junit 4, Mockito, PowerMock)
 
 
 #### Monitoring

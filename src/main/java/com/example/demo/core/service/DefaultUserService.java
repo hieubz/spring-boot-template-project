@@ -25,4 +25,25 @@ public class DefaultUserService implements UserService {
   public CustomUserDetails loadDefaultUserForFixedTokenAuth() {
     return CustomUserDetails.builder().username("default").build();
   }
+
+  /** Use only for Unit Test common cases */
+  public void voidMethodForUnitTesting() {
+    String s = feature2();
+  }
+
+  /** Use only for Unit Test common cases */
+  public void voidMethodForUnitTesting2() {
+  }
+
+  /** Use only for Unit Test common cases */
+  public void feature1() {
+    voidMethodForUnitTesting();
+    voidMethodForUnitTesting2();
+    feature2();
+  }
+
+  /** Use only for Unit Test common cases */
+  public String feature2() {
+    return "";
+  }
 }
