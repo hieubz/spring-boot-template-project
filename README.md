@@ -36,7 +36,7 @@ And we have the code flow as shown below:
 - [x] REST client using OpenFeign
 - [x] Background Job
 - [x] Retry
-- [ ] Export XLSX/CSV reports
+- [x] Export XLSX/CSV reports
 
 #### Advanced Techniques
 - [x] Caching with Redis
