@@ -1,6 +1,7 @@
 package com.example.demo.infrastructure.msg_queue.vo;
 
 import com.example.demo.infrastructure.msg_queue.Message;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.PropertyNamingStrategies;
 import com.fasterxml.jackson.databind.annotation.JsonNaming;
 import lombok.*;
@@ -15,5 +16,7 @@ import java.time.LocalDateTime;
 @JsonNaming(PropertyNamingStrategies.SnakeCaseStrategy.class)
 public class DemoMessage extends Message {
   private Long id;
+
+  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
   private LocalDateTime created;
 }

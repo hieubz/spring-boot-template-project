@@ -46,7 +46,7 @@ And we have the code flow as shown below:
 - [x] Event Handling
 - [x] Race Condition Handling (Redis/MongoDB Lock)
 - [ ] Distributed Transactions
-- [ ] Kafka Producer/Consumer (Json, Avro)
+- [x] Kafka Producer/Consumer (Json, Avro)
 - [x] Generate and send emails
 
 #### Datasource
