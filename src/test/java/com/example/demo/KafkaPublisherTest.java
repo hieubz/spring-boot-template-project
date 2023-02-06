@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @SpringBootTest
 public class KafkaPublisherTest {
 
-  @Value("${kafka.topic.demo_topic}")
+  @Value("${kafka.consumer.messages.topic}")
   private String demoTopic;
 
   @Autowired private KafkaPublisher kafkaPublisher;
