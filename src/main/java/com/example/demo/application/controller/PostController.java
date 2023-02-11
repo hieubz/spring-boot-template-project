@@ -31,4 +31,15 @@ public class PostController extends BaseController {
     Post post = postService.getLastPost();
     return PostResponse.builder().post(post).success(true).build();
   }
+
+  @GetMapping(value = "/test-activemq")
+  @Parameter(
+          name = AppConstants.FIXED_TOKEN_HEADER,
+          required = true,
+          in = ParameterIn.HEADER,
+          example = "39489c18-7b74-11ec-90d6-0242ac120003")
+  public PostResponse testActiveMQ() {
+    postService.testActiveMQ("demo-queue");
+    return PostResponse.builder().success(true).build();
+  }
 }

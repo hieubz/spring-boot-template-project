@@ -5,6 +5,8 @@ Thanks to my brothers **SonPM**, **DatDD**, **LinhPH**.
 ## Overview
 A project which contains _**common backend features**_ to help me or any other Spring Boot developers can code faster.
 
+_Java 11, Spring Boot 2.7.x_
+
 ## Architecture
 We divided the project into 4 components:
 
@@ -36,6 +38,7 @@ And we have the code flow as shown below:
 - [x] REST client using OpenFeign
 - [x] Background Job
 - [x] Retry
+- [x] ActiveMQ and Spring JMS Integration
 - [x] Export XLSX/CSV reports
 
 #### Advanced Techniques
