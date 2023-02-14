@@ -74,9 +74,10 @@ Then you can apply the code of the corresponding commit for your feature.
 
 ## Setup
 - Download and install [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Recommends)
+- Install [Docker and Docker Compose](https://linuxhint.com/install-docker-compose-ubuntu-22-04/) if you don't have your own database and message brokers
 - Run `git clone https://github.com/hieubz/spring-boot-based-project.git`
 - [Configure](https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk) **JDK 11** for your project on **IntelliJ IDEA**
-- Run `docker-compose up -d` to start MySQL, MongoDB and Redis (or update your database configs in **application.properties**)
+- Run `docker-compose up -d` to start **MySQL**, **MongoDB**, **Redis**, **Kafka** and **ActiveMQ** (or update your database configs in **application.properties**)
 - Run **_resources/schema/mysql-schema.sql_** to initialize your MySQL database.
 - Run commands in **_resources/schema/mongo-schema.txt_** to initialize your MongoDB database.
 - Run your **DemoApplication** and check Swagger UI: http://localhost:8080/swagger-ui/index.html#/
