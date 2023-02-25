@@ -65,6 +65,19 @@ services:
       KAFKA_TRANSACTION_STATE_LOG_MIN_ISR: 1
       KAFKA_TRANSACTION_STATE_LOG_REPLICATION_FACTOR: 1
 
+  elasticsearch:
+    container_name: elasticsearch
+    image: docker.elastic.co/elasticsearch/elasticsearch:8.6.2
+    environment:
+      - xpack.security.enabled=false
+      - "discovery.type=single-node"
+    networks:
+      - esnet
+    ports:
+      - 9200:9200
 volumes:
   mysql-data:
   redis-data:
+
+networks:
+  esnet:
