@@ -8,6 +8,7 @@ import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.application.response.UpdatePriceResult;
 import com.example.demo.core.adapter.ProductAdapter;
 import com.example.demo.core.domain.Product;
+import com.example.demo.core.domain.ProductStatus;
 import com.example.demo.infrastructure.locks.ProductMongoLocker;
 import com.example.demo.infrastructure.locks.ProductRedisLocker;
 import com.example.demo.shared.exception.ConcurrentProcessingException;
@@ -38,7 +39,13 @@ public class DefaultProductService implements ProductService {
   @Override
   public void insertNewProduct(NewProductRequest request) {
     log.info("> ProductService.insertNewProduct {}", request);
-    Product product = Product.builder().name(request.getName()).price(request.getPrice()).build();
+    Product product =
+        Product.builder()
+            .name(request.getName())
+            .price(request.getPrice())
+            .categoryId(request.getCategoryId())
+            .status(ProductStatus.OK.id())
+            .build();
     this.productAdapter.insertNewProduct(product);
   }
 

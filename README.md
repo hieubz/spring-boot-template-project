@@ -34,12 +34,15 @@ And we have the code flow as shown below:
 - [x] Pagination
 - [x] MDC logging
 - [x] Exception Handling
-- [x] Swagger
-- [x] REST client using OpenFeign
+- [x] Jackson & JSR310
+- [x] REST client with OpenFeign
+- [ ] SOAP client with JAXB
 - [x] Background Job
 - [x] Retry
 - [x] ActiveMQ and Spring JMS Integration
 - [x] Export XLSX/CSV reports
+- [ ] CORS configuration
+- [x] Swagger
 
 #### Advanced Techniques
 - [x] Caching with Redis
@@ -50,7 +53,9 @@ And we have the code flow as shown below:
 - [x] Race Condition Handling (Redis/MongoDB Lock)
 - [ ] Distributed Transactions
 - [x] Kafka Producer/Consumer (Json, Avro)
+- [x] Search Backend with Elasticsearch
 - [x] Generate and send emails
+- [ ] Rate limit with Bucket4j
 
 #### Datasource
 - [x] Multiple DataSource Configuration
@@ -66,18 +71,23 @@ And we have the code flow as shown below:
 
 
 ## How to use
-Each commit will be a feature except **update README.md** commits. You can search on **IntelliJ** (**Git** tab) by feature keywords:
+Firstly, clone it to your local and open by your IDE (IntelliJ, Eclipse).
+
+Each commit will be a feature except **update README.md** commits. For example, you can search on **IntelliJ** (**Git** tab) by feature keywords:
 
 ![img_2.png](src/main/resources/META-INF/feature_searching.png)
 
 Then you can apply the code of the corresponding commit for your feature. 
 
 ## Setup
+
+To run this project (optional for new guys, **minimum 16GB RAM**)
+
 - Download and install [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Recommends)
 - Install [Docker and Docker Compose](https://linuxhint.com/install-docker-compose-ubuntu-22-04/) if you don't have your own database and message brokers
 - Run `git clone https://github.com/hieubz/spring-boot-based-project.git`
 - [Configure](https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk) **JDK 11** for your project on **IntelliJ IDEA**
-- Run `docker-compose up -d` to start **MySQL**, **MongoDB**, **Redis**, **Kafka** and **ActiveMQ** (or update your database configs in **application.properties**)
+- Run `docker-compose up -d` to start **MySQL**, **MongoDB**, **Redis**, **Kafka**, **ActiveMQ** and **Elasticsearch** (or update your database configs in **application.properties**)
 - Run **_resources/schema/mysql-schema.sql_** to initialize your MySQL database.
 - Run commands in **_resources/schema/mongo-schema.txt_** to initialize your MongoDB database.
 - Run your **DemoApplication** and check Swagger UI: http://localhost:8080/swagger-ui/index.html#/
