@@ -23,7 +23,7 @@ public class DefaultUserService implements UserService {
 
   @Override
   public CustomUserDetails loadDefaultUserForFixedTokenAuth() {
-    return CustomUserDetails.builder().username("default").build();
+    return CustomUserDetails.builder().userId(0L).username("default").build();
   }
 
   /** Use only for Unit Test common cases */

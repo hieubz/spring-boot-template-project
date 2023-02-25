@@ -55,7 +55,7 @@ And we have the code flow as shown below:
 - [x] Kafka Producer/Consumer (Json, Avro)
 - [x] Search Backend with Elasticsearch
 - [x] Generate and send emails
-- [ ] Rate limit with Bucket4j
+- [x] Rate Limit with Bucket4j
 
 #### Datasource
 - [x] Multiple DataSource Configuration
