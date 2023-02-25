@@ -17,6 +17,6 @@ import java.time.LocalDateTime;
 public class DemoMessage extends Message {
   private Long id;
 
-  @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+  @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", shape = JsonFormat.Shape.STRING)
   private LocalDateTime created;
 }
