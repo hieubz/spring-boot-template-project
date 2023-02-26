@@ -21,18 +21,21 @@ import java.util.List;
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class CustomUserDetails implements UserDetails {
 
+  private String ROLE_PREFIX = "ROLE_";
+
   private Long userId;
   private String username;
   private String encryptedPassword;
   private String tel;
   private Integer departmentId;
+  private List<String> roles;
 
   @JsonIgnore private Collection<? extends GrantedAuthority> authorities;
 
   @Override
   public Collection<? extends GrantedAuthority> getAuthorities() {
     List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-    authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+    roles.forEach(r -> authorities.add(new SimpleGrantedAuthority(ROLE_PREFIX + r)));
     return authorities;
   }
 

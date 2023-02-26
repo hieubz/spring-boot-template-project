@@ -7,6 +7,7 @@ import com.example.demo.shared.constants.AppConstants;
 import io.jsonwebtoken.Claims;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -21,6 +22,7 @@ import java.io.IOException;
 import java.util.Objects;
 
 @Slf4j
+@Order(3)
 public class VerifyJwtTokenFilter extends OncePerRequestFilter {
 
   @Autowired private JwtTokenProvider jwtTokenProvider;

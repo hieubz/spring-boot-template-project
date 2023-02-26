@@ -26,7 +26,7 @@ And we have the code flow as shown below:
 - [x] Fixed Token Authentication
 - [x] JWT Authentication
 - [ ] Session based Authentication
-- [ ] Authorization
+- [x] Authorization
 
 #### Web Basics
 - [x] Basic REST API

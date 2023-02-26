@@ -63,7 +63,11 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
   protected void configure(HttpSecurity http) throws Exception {
     if (applicationType.equals(WEB_APPLICATION_TYPE)) {
       http.cors().configurationSource(corsConfigurationSource()).and().csrf().disable();
-      http.authorizeRequests().antMatchers(AUTH_WHITELIST).permitAll().anyRequest().authenticated();
+      http.authorizeRequests()
+          .antMatchers(AUTH_WHITELIST).permitAll()
+          .antMatchers("/api/admin/**").hasRole("ADMIN")
+          .antMatchers("/api/db/**").hasAnyRole("ADMIN", "DBA")
+          .anyRequest().authenticated();
       http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
       http.exceptionHandling().authenticationEntryPoint(authEntryPointJwt);
       http.addFilterBefore(

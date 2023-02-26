@@ -5,6 +5,8 @@ import com.example.demo.infrastructure.config.auth.CustomUserDetails;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class DefaultUserService implements UserService {
@@ -23,7 +25,7 @@ public class DefaultUserService implements UserService {
 
   @Override
   public CustomUserDetails loadDefaultUserForFixedTokenAuth() {
-    return CustomUserDetails.builder().userId(0L).username("default").build();
+    return CustomUserDetails.builder().userId(0L).username("default").roles(List.of("USER")).build();
   }
 
   /** Use only for Unit Test common cases */

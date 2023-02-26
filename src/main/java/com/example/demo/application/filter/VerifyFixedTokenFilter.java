@@ -6,6 +6,7 @@ import com.example.demo.shared.constants.AppConstants;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -20,6 +21,7 @@ import java.util.Optional;
 import java.util.Set;
 
 @Slf4j
+@Order(2)
 public class VerifyFixedTokenFilter extends OncePerRequestFilter {
 
   @Value("${verified_tokens}")
