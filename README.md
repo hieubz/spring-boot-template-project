@@ -5,7 +5,7 @@ Thanks to my brothers **SonPM**, **DatDD**, **LinhPH**.
 ## Overview
 A project which contains _**common backend features**_ to help me or any other Spring Boot developers can code faster.
 
-_Java 11, Spring Boot 2.7.x_
+_Java 17, Spring Boot 3.1.5_
 
 ## Architecture
 We divided the project into 4 components:
@@ -86,7 +86,7 @@ To run this project (optional for new guys, **minimum 16GB RAM** if you run loca
 - Download and install [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Recommends)
 - Install [Docker and Docker Compose](https://linuxhint.com/install-docker-compose-ubuntu-22-04/) if you don't have your own database and message brokers
 - Run `git clone https://github.com/hieubz/spring-boot-based-project.git`
-- [Configure](https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk) **JDK 11** for your project on **IntelliJ IDEA**
+- [Configure](https://www.jetbrains.com/help/idea/sdk.html#change-project-sdk) **JDK 11/17** for your project on **IntelliJ IDEA**
 - Run `docker-compose up -d` to start **MySQL**, **MongoDB**, **Redis**, **Kafka**, **ActiveMQ** and **Elasticsearch** (or update your database configs in **application.properties**)
   
     _Notes: **Elasticsearch** container requires much RAM on local_
@@ -105,4 +105,4 @@ To run this project (optional for new guys, **minimum 16GB RAM** if you run loca
 
 #### DataGrip
 
-- I recommend using [DataGrip](https://www.jetbrains.com/datagrip/download/) to work with MySQL and MongoDB
+- I recommend using [DataGrip](https://www.jetbrains.com/datagrip/download/) to work with MySQL, MongoDB, Redis

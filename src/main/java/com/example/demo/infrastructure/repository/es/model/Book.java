@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
 import org.springframework.data.elasticsearch.annotations.Document;
 
-import javax.persistence.Id;
+import jakarta.persistence.Id;
 
 @Document(indexName = "hieubz")
 @AllArgsConstructor

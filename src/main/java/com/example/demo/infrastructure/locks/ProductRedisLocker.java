@@ -2,7 +2,7 @@ package com.example.demo.infrastructure.locks;
 
 import org.springframework.stereotype.Component;
 
-import javax.annotation.PostConstruct;
+import jakarta.annotation.PostConstruct;
 
 @Component("ProductRedisLocker")
 public class ProductRedisLocker extends BaseRedisLocker<Long> {

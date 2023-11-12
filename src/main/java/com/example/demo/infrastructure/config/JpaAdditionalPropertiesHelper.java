@@ -8,7 +8,7 @@ public final class JpaAdditionalPropertiesHelper {
     Map<String, String> properties = new HashMap<>();
     properties.put(
         "hibernate.physical_naming_strategy",
-        "org.springframework.boot.orm.jpa.hibernate.SpringPhysicalNamingStrategy");
+        "org.hibernate.boot.model.naming.CamelCaseToUnderscoresNamingStrategy");
     properties.put(
         "hibernate.implicit_naming_strategy",
         "org.springframework.boot.orm.jpa.hibernate.SpringImplicitNamingStrategy");

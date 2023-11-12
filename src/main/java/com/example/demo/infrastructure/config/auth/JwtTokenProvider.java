@@ -1,14 +1,14 @@
 package com.example.demo.infrastructure.config.auth;
 
-import com.example.demo.shared.constants.AppConstants;
 import io.jsonwebtoken.*;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Component;
-
+import io.jsonwebtoken.security.Keys;
+import io.jsonwebtoken.security.SignatureException;
 import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.Objects;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 @Component
 @Slf4j
@@ -22,10 +22,10 @@ public class JwtTokenProvider {
 
   public String generateJwtToken(Long userId) {
     return Jwts.builder()
-        .setSubject(userId.toString())
-        .setIssuedAt(new Date())
-        .setExpiration(new Date(new Date().getTime() + jwtExpirationMs))
-        .signWith(SignatureAlgorithm.HS256, jwtSecret.getBytes(StandardCharsets.UTF_8))
+        .subject(userId.toString())
+        .issuedAt(new Date())
+        .expiration(new Date(new Date().getTime() + jwtExpirationMs))
+        .signWith(Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8)), Jwts.SIG.HS256)
         .compact();
   }
 
@@ -33,9 +33,10 @@ public class JwtTokenProvider {
     if (Objects.isNull(jwt)) return null;
     try {
       return Jwts.parser()
-          .setSigningKey(jwtSecret.getBytes(StandardCharsets.UTF_8))
-          .parseClaimsJws(jwt)
-          .getBody();
+          .verifyWith(Keys.hmacShaKeyFor(jwtSecret.getBytes(StandardCharsets.UTF_8)))
+          .build()
+          .parseSignedClaims(jwt)
+          .getPayload();
     } catch (SignatureException e) {
       log.error("Invalid JWT signature: {}", e.getMessage());
     } catch (MalformedJwtException e) {
