@@ -1,20 +1,27 @@
-# Spring Boot Based Backend Project
+# Spring Boot Template Project
 
 Thanks to my brothers **SonPM**, **DatDD**, **LinhPH**.
 
 ## Overview
-A project which contains _**common backend features**_ to help me or any other Spring Boot developers can code faster.
+Whenever I need to implement a new feature, I typically start by researching available solutions on Google. Then I will experiment with one or more solutions to select the best one.
+However, after several months, I might _forget how to implement that feature_. Consequently, I end up having to _revisit internet resources, conduct research once again, and reattempt the implementation_.
 
-_Java 17, Spring Boot 3.1.5_
+<img alt="Google_Search" src="src/main/resources/META-INF/google_search.png" height=60% width=60%/>
+
+The above situation is very common, not just for me but also among my friends and colleagues. We waste a lot of time recalling and researching solutions - things could be synthesized in a template project for the next implementation.
+
+So I have developed this project which includes implementations designed to assist both myself and other Spring Boot developers in seamlessly diving into coding. Each commit within the project represents the implementation of a specific technique.
+
+_The project uses Java 17 and Spring Boot 3.1.5_.
 
 ## Architecture
-We divided the project into 4 components:
+I designed the project with 4 main components:
 
     .
-    ├── application               # Controllers, passing user input into services respectively
-    ├── core                      # Domain logic, divided into services
+    ├── application               # Controllers, passing user requests into services respectively
+    ├── core                      # Domain logic, designed into services
     ├── infrastructure            # Config, repository, third parties,...
-    └── shared                    # constants, DTO, utils,...
+    └── shared                    # Constants, DTO, utils,...
 
 And we have the code flow as shown below:
 
@@ -81,7 +88,7 @@ Then you can apply the code of the corresponding commit for your feature.
 
 ## Setup
 
-To run this project (optional for new guys, **minimum 16GB RAM** if you run local **Elasticsearch**)
+To run this project (optional for new guys, **minimum 16GB RAM** if you want to run local **Elasticsearch**)
 
 - Download and install [IntelliJ IDEA](https://www.jetbrains.com/idea/download/) (Recommends)
 - Install [Docker and Docker Compose](https://linuxhint.com/install-docker-compose-ubuntu-22-04/) if you don't have your own database and message brokers
@@ -91,15 +98,15 @@ To run this project (optional for new guys, **minimum 16GB RAM** if you run loca
   
     _Notes: **Elasticsearch** container requires much RAM on local_
 
-- Run **_resources/schema/mysql-schema.sql_** to initialize your MySQL database.
-- Run commands in **_resources/schema/mongo-schema.txt_** to initialize your MongoDB database.
+- Run **_resources/schema/mysql-schema.ddl_** to initialize your MySQL database.
+- Run commands in **_resources/schema/mongo-schema.ddl_** to initialize your MongoDB database.
 - Run your **DemoApplication** and check Swagger UI: http://localhost:8080/swagger-ui/index.html#/
 
 ## Tools
 
-#### Redis Commander
+#### Redis Commander (for Linux only)
 
-- Install [Redis Commander](https://github.com/joeferner/redis-commander) which will support you to check your Redis cache
+- Install [Redis Commander](https://github.com/joeferner/redis-commander) as your Redis client
 - Run `redis-commander --redis-db 10 --redis-password 123` (depends on your db/password config)
 - Check your Redis Commander UI: http://127.0.0.1:8081
 
