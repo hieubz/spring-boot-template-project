@@ -6,7 +6,7 @@ Thanks to my brothers **SonPM**, **DatDD**, **LinhPH**.
 Whenever I need to implement a new feature, I typically start by researching available solutions on Google. Then I will experiment with one or more solutions to select the best one.
 However, after several months, I might _forget how to implement that feature_. Consequently, I end up having to _revisit internet resources, conduct research once again, and reattempt the implementation_.
 
-<img alt="Google_Search" src="src/main/resources/META-INF/google_search.png" height=60% width=60%/>
+<img alt="Google_Search" src="src/main/resources/META-INF/google_search.png" height=70% width=70%/>
 
 The above situation is very common, not just for me but also among my friends and colleagues. We waste a lot of time recalling and researching solutions - things could be synthesized in a template project for the next implementation.
 
@@ -70,6 +70,7 @@ And we have the code flow as shown below:
 
 #### Unit Test
 - [x] Unit Test common cases (with Junit 4, Mockito, PowerMock)
+- [x] Integrate Jacoco for Code Coverage
 
 
 #### Monitoring
