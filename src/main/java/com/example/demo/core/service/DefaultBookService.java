@@ -3,6 +3,7 @@ package com.example.demo.core.service;
 import com.example.demo.infrastructure.repository.es.BookRepository;
 import com.example.demo.infrastructure.repository.es.model.Book;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,8 @@ import java.util.List;
 @RequiredArgsConstructor
 public class DefaultBookService implements BookService {
 
-  private final BookRepository bookRepository;
+  @Autowired(required = false)
+  private BookRepository bookRepository;
 
   @Override
   public Book save(Book book) {

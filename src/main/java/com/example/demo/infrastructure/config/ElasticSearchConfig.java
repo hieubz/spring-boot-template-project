@@ -15,30 +15,30 @@ import org.springframework.data.elasticsearch.config.ElasticsearchConfigurationS
 import org.springframework.data.elasticsearch.core.convert.ElasticsearchConverter;
 import org.springframework.data.elasticsearch.repository.config.EnableElasticsearchRepositories;
 
-@Configuration
-@EnableElasticsearchRepositories(basePackages = "com.example.demo.infrastructure.repository.es")
-public class ElasticSearchConfig extends ElasticsearchConfigurationSupport {
-
-  @Value("${spring.elasticsearch.host}")
-  private String esHost;
-
-  @Value("${spring.elasticsearch.port}")
-  private Integer esPort;
-
-  @Bean(name = "elasticsearchClient")
-  public ElasticsearchClient elasticsearchClient() {
-    RestClient httpClient = RestClient.builder(new HttpHost(esHost, esPort)).build();
-    ElasticsearchTransport transport =
-        new RestClientTransport(httpClient, new JacksonJsonpMapper());
-    return new ElasticsearchClient(transport);
-  }
-
-  @Bean("elasticsearchTemplate")
-  public ElasticsearchTemplate elasticsearchTemplate(
-      @Qualifier("elasticsearchClient") ElasticsearchClient client,
-      ElasticsearchConverter elasticsearchConverter) {
-    ElasticsearchTemplate template = new ElasticsearchTemplate(client, elasticsearchConverter);
-    template.setRefreshPolicy(this.refreshPolicy());
-    return template;
-  }
-}
+//@Configuration
+//@EnableElasticsearchRepositories(basePackages = "com.example.demo.infrastructure.repository.es")
+//public class ElasticSearchConfig extends ElasticsearchConfigurationSupport {
+//
+//  @Value("${spring.elasticsearch.host}")
+//  private String esHost;
+//
+//  @Value("${spring.elasticsearch.port}")
+//  private Integer esPort;
+//
+//  @Bean(name = "elasticsearchClient")
+//  public ElasticsearchClient elasticsearchClient() {
+//    RestClient httpClient = RestClient.builder(new HttpHost(esHost, esPort)).build();
+//    ElasticsearchTransport transport =
+//        new RestClientTransport(httpClient, new JacksonJsonpMapper());
+//    return new ElasticsearchClient(transport);
+//  }
+//
+//  @Bean("elasticsearchTemplate")
+//  public ElasticsearchTemplate elasticsearchTemplate(
+//      @Qualifier("elasticsearchClient") ElasticsearchClient client,
+//      ElasticsearchConverter elasticsearchConverter) {
+//    ElasticsearchTemplate template = new ElasticsearchTemplate(client, elasticsearchConverter);
+//    template.setRefreshPolicy(this.refreshPolicy());
+//    return template;
+//  }
+//}
