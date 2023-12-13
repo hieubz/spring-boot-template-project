@@ -14,6 +14,8 @@ So I have developed this project which includes implementations designed to assi
 
 _The project uses Java 17 and Spring Boot 3.1.5_.
 
+**If you find this project useful, please give it a star ⭐️!**
+
 ## Architecture
 I designed the project with 4 main components:
 

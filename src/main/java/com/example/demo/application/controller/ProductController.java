@@ -35,7 +35,6 @@ public class ProductController extends BaseController {
   private final ApplicationEventPublisher applicationEventPublisher;
 
   @PostMapping(
-      value = "/add",
       consumes = {MediaType.APPLICATION_JSON_VALUE},
       produces = {MediaType.APPLICATION_JSON_VALUE})
   @Parameter(
@@ -94,7 +93,7 @@ public class ProductController extends BaseController {
     return BaseResponse.builder().success(result.getStatus()).message(result.getMsg()).build();
   }
 
-  @GetMapping(value = "/get_details/{id}")
+  @GetMapping(value = "/{id}")
   @Parameter(
       name = AppConstants.FIXED_TOKEN_HEADER,
       required = true,
@@ -108,7 +107,7 @@ public class ProductController extends BaseController {
         .build();
   }
 
-  @GetMapping(value = "/get-all")
+  @GetMapping
   @Parameter(
       name = AppConstants.FIXED_TOKEN_HEADER,
       required = true,
