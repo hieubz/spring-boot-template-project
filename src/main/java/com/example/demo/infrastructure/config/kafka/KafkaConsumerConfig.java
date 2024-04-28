@@ -12,8 +12,11 @@ import org.springframework.kafka.annotation.EnableKafka;
 import org.springframework.kafka.config.ConcurrentKafkaListenerContainerFactory;
 import org.springframework.kafka.core.ConsumerFactory;
 import org.springframework.kafka.core.DefaultKafkaConsumerFactory;
+import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.listener.ContainerProperties;
 import org.springframework.kafka.listener.DefaultErrorHandler;
+import org.springframework.kafka.retrytopic.RetryTopicConfiguration;
+import org.springframework.kafka.retrytopic.RetryTopicConfigurationBuilder;
 import org.springframework.kafka.support.serializer.ErrorHandlingDeserializer;
 import org.springframework.util.backoff.BackOff;
 import org.springframework.util.backoff.FixedBackOff;
@@ -83,5 +86,20 @@ public class KafkaConsumerConfig {
     errorHandler.addRetryableExceptions(SocketTimeoutException.class);
     errorHandler.addNotRetryableExceptions(NullPointerException.class);
     return errorHandler;
+  }
+
+  /**
+   * The DLT handler method can also be provided through the
+   * RetryTopicConfigurationBuilder.dltHandlerMethod(String, String) method, passing as arguments
+   * the bean name and method name that should process the DLT’s messages.
+   * * *
+   * Notes: we can also configure factory, backoff, maxAttempts, retryOn exceptions,...
+   * in the RetryTopicConfiguration bean
+   */
+  @Bean
+  public RetryTopicConfiguration myRetryTopic(KafkaTemplate<String, String> template) {
+    return RetryTopicConfigurationBuilder.newInstance()
+        .dltHandlerMethod("myCustomDltProcessor", "processDltMessage")
+        .create(template);
   }
 }
