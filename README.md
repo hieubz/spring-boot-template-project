@@ -25,7 +25,7 @@ I designed the project with 4 main components:
     ├── infrastructure            # Config, repository, third parties,...
     └── shared                    # Constants, DTO, utils,...
 
-And we have the code flow as shown below:
+And we have a main flow as shown below:
 
 ![Raw Design](src/main/resources/META-INF/raw_code_flow.png)
 
