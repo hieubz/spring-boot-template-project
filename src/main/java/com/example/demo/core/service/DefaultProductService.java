@@ -1,9 +1,6 @@
 package com.example.demo.core.service;
 
-import com.example.demo.application.request.GetAllProductRequest;
-import com.example.demo.application.request.NewProductRequest;
-import com.example.demo.application.request.PriceCheckRequest;
-import com.example.demo.application.request.UpdatePriceRequest;
+import com.example.demo.application.request.*;
 import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.application.response.UpdatePriceResult;
 import com.example.demo.core.adapter.ProductAdapter;
@@ -47,6 +44,16 @@ public class DefaultProductService implements ProductService {
             .status(ProductStatus.OK.id())
             .build();
     this.productAdapter.insertNewProduct(product);
+  }
+
+  @Override
+  public void updateNewProduct(UpdateProductRequest request) throws ProductNotFoundException {
+    Product product = this.productAdapter.findById(request.getId());
+    if (product == null) throw new ProductNotFoundException("Product ID not found");
+    product.setName(request.getName());
+    product.setCategoryId(request.getCategoryId());
+    product.setPrice(request.getPrice());
+    this.productAdapter.updateNewProduct(product);
   }
 
   @Override

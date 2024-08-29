@@ -1,9 +1,6 @@
 package com.example.demo.application.controller;
 
-import com.example.demo.application.request.NewProductRequest;
-import com.example.demo.application.request.PriceCheckRequest;
-import com.example.demo.application.request.UpdatePriceRequest;
-import com.example.demo.application.request.GetAllProductRequest;
+import com.example.demo.application.request.*;
 import com.example.demo.application.response.*;
 import com.example.demo.core.domain.Product;
 import com.example.demo.core.service.ProductService;
@@ -14,6 +11,7 @@ import com.example.demo.shared.exception.ProductNotFoundException;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.slf4j.MDC;
 import org.springframework.context.ApplicationEventPublisher;
@@ -46,6 +44,19 @@ public class ProductController extends BaseController {
     productService.insertNewProduct(request);
     applicationEventPublisher.publishEvent(
         new NewProductEvent(this, MDC.get(AppConstants.REQUEST_ID_KEY), request));
+    return new NewProductResponse("ok");
+  }
+
+  @PutMapping(
+          consumes = {MediaType.APPLICATION_JSON_VALUE},
+          produces = {MediaType.APPLICATION_JSON_VALUE})
+  @Parameter(
+          name = AppConstants.FIXED_TOKEN_HEADER,
+          required = true,
+          in = ParameterIn.HEADER,
+          example = "39489c18-7b74-11ec-90d6-0242ac120003")
+  public NewProductResponse updateProduct(@Valid @RequestBody UpdateProductRequest request) throws ProductNotFoundException {
+    productService.updateNewProduct(request);
     return new NewProductResponse("ok");
   }
 

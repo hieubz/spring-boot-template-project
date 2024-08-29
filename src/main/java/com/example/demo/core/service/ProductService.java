@@ -1,9 +1,6 @@
 package com.example.demo.core.service;
 
-import com.example.demo.application.request.GetAllProductRequest;
-import com.example.demo.application.request.NewProductRequest;
-import com.example.demo.application.request.PriceCheckRequest;
-import com.example.demo.application.request.UpdatePriceRequest;
+import com.example.demo.application.request.*;
 import com.example.demo.application.response.PriceCheckResult;
 import com.example.demo.application.response.UpdatePriceResult;
 import com.example.demo.core.domain.Product;
@@ -16,6 +13,8 @@ import java.util.concurrent.ExecutionException;
 public interface ProductService {
 
   void insertNewProduct(NewProductRequest request);
+
+  void updateNewProduct(UpdateProductRequest request) throws ProductNotFoundException;
 
   List<Product> loadAllProducts(Integer pageNo, Integer pageSize, String sortBy);
 

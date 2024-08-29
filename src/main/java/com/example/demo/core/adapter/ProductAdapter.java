@@ -16,6 +16,8 @@ public interface ProductAdapter {
 
   void insertNewProduct(Product product);
 
+  void updateNewProduct(Product product);
+
   Product loadProductDetails(Long id) throws ProductNotFoundException;
 
   CompletableFuture<PriceCheckResult> checkAsyncPrice(Product product) throws InterruptedException;

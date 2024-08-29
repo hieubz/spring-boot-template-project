@@ -55,6 +55,11 @@ public class DefaultProductAdapter implements ProductAdapter {
   }
 
   @Override
+  public void updateNewProduct(Product product) {
+    this.productRepository.save(BaseModelMapper.mapper(product, ProductEntity.class));
+  }
+
+  @Override
   @Cacheable(
       cacheNames = "productDetails",
       unless = "#result == null",
