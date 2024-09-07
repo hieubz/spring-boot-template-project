@@ -1,6 +1,6 @@
 package com.example.demo.shared.exception;
 
-public class PostNotFoundException extends BaseException {
+public class PostNotFoundException extends RuntimeException {
 
   public PostNotFoundException(String msg) {
     super(msg);

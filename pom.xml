@@ -167,6 +167,11 @@
 			<artifactId>spring-cloud-starter-openfeign</artifactId>
 			<version>4.0.4</version>
 		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-circuitbreaker-resilience4j</artifactId>
+			 <version>3.1.2</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework.retry</groupId>
@@ -275,7 +280,7 @@
 		<dependency>
 			<groupId>com.giffing.bucket4j.spring.boot.starter</groupId>
 			<artifactId>bucket4j-spring-boot-starter</artifactId>
-			<version>0.7.0</version>
+			<version>0.10.0</version>
 		</dependency>
 
 	</dependencies>

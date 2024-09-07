@@ -7,6 +7,7 @@ import com.example.demo.application.response.PriceCheckResponse;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.PostNotFoundException;
 import com.example.demo.shared.exception.ProductNotFoundException;
+import com.example.demo.shared.exception.ServiceUnavailableException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -45,6 +46,12 @@ public class RestExceptionHandler {
   public ResponseEntity<PostResponse> handlePostNotFoundException() {
     return new ResponseEntity<>(
         PostResponse.builder().message(MSG_POST_NOT_FOUND).success(false).build(), HttpStatus.NOT_FOUND);
+  }
+
+  @ExceptionHandler(value = ServiceUnavailableException.class)
+  public ResponseEntity<String> handleServiceUnavailableException() {
+    return new ResponseEntity<>(
+        "Service is currently unavailable. Please try again later.", HttpStatus.SERVICE_UNAVAILABLE);
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)

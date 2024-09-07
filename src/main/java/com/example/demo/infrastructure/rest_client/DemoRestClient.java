@@ -1,18 +1,19 @@
 package com.example.demo.infrastructure.rest_client;
 
 import com.example.demo.core.domain.Post;
-import com.example.demo.infrastructure.config.feign.FeignConfig;
+
+import java.util.List;
+
+import com.example.demo.infrastructure.config.feign.PostFeignConfig;
 import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import java.util.List;
-
 @FeignClient(
     name = "demo-rest-client",
     url = "${jsonplaceholder-api-host}",
-    configuration = FeignConfig.class)
+    configuration = PostFeignConfig.class)
 public interface DemoRestClient {
 
   @RequestMapping(method = RequestMethod.GET, value = "${jsonplaceholder-api-path}")
