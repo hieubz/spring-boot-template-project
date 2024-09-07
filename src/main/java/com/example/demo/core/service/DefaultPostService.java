@@ -8,7 +8,6 @@ import com.example.demo.shared.exception.PostNotFoundException;
 import com.example.demo.shared.exception.ServiceUnavailableException;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
 import java.time.LocalDateTime;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.retry.annotation.Backoff;
@@ -28,7 +27,7 @@ public class DefaultPostService implements PostService {
       retryFor = PostNotFoundException.class, // for testing purpose, we should not retry if not found =))
       maxAttemptsExpression = "${retry.maxAttempts}",
       backoff = @Backoff(delayExpression = "${retry.backOffDelay}"))
-  @CircuitBreaker(name = "demo-feign-client", fallbackMethod = "fallbackGetLastPost")
+  @CircuitBreaker(name = "demo-feign-client", fallbackMethod = "getLastPostCircuitFallback")
   public Post getLastPost() throws PostNotFoundException {
     Post post = demoRestClient.getPostById(100L); // just for demo =)))
     if (post == null) {
@@ -41,7 +40,7 @@ public class DefaultPostService implements PostService {
   /**
    * We should declare the fallback at Service layer to maintain better separation of concerns.
    */
-  public Post fallbackGetLastPost(Exception e) throws Exception {
+  public Post getLastPostCircuitFallback(Exception e) throws Exception {
     // for each exception, we can have a diff scenario
     if (e instanceof PostNotFoundException) throw e;
     log.error("Post Service is unavailable", e);

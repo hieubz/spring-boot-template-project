@@ -64,7 +64,8 @@ And we have a main flow as shown below:
 - [x] Kafka Producer/Consumer (Json, Avro)
 - [x] Search Backend with Elasticsearch
 - [x] Generate and send emails
-- [x] Rate Limit with Bucket4j
+- [x] Rate Limiter with Bucket4j
+- [x] Circuit Breaker, Rate Limiter with Resilience4j
 
 #### Datasource
 - [x] Multiple DataSource Configuration

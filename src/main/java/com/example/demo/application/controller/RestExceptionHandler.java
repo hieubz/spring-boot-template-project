@@ -4,10 +4,7 @@ import com.example.demo.application.response.BaseResponse;
 import com.example.demo.application.response.FindProductResponse;
 import com.example.demo.application.response.PostResponse;
 import com.example.demo.application.response.PriceCheckResponse;
-import com.example.demo.shared.exception.EmptyRequestException;
-import com.example.demo.shared.exception.PostNotFoundException;
-import com.example.demo.shared.exception.ProductNotFoundException;
-import com.example.demo.shared.exception.ServiceUnavailableException;
+import com.example.demo.shared.exception.*;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -52,6 +49,12 @@ public class RestExceptionHandler {
   public ResponseEntity<String> handleServiceUnavailableException() {
     return new ResponseEntity<>(
         "Service is currently unavailable. Please try again later.", HttpStatus.SERVICE_UNAVAILABLE);
+  }
+
+  @ExceptionHandler(value = RateLimitExceededException.class)
+  public ResponseEntity<String> handleRateLimitExceededException() {
+    return new ResponseEntity<>(
+        "Rate limit exceeded. Please try again later.", HttpStatus.TOO_MANY_REQUESTS);
   }
 
   @ResponseStatus(HttpStatus.BAD_REQUEST)
