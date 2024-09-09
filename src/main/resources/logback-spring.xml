@@ -21,6 +21,31 @@
         </encoder>
     </appender>
 
+    <!-- Rolling File Appender -->
+    <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <!-- Log file location -->
+        <file>logs/app.log</file>
+
+        <!-- Time-based rolling policy -->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+<!--            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.log</fileNamePattern>-->
+<!--        </rollingPolicy>-->
+
+        <!-- Size and Time-based rolling policy -->
+        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">
+            <!-- Daily rollover with size limit -->
+            <fileNamePattern>logs/app-%d{yyyy-MM-dd}.%i.log</fileNamePattern>
+            <maxFileSize>2MB</maxFileSize> <!-- File size limit of 2MB -->
+            <maxHistory>14</maxHistory> <!-- Keeps logs for 14 days -->
+        </rollingPolicy>
+
+        <!-- Log encoding and pattern -->
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%t] %p %logger{36} %m%n</pattern>
+            <charset>utf8</charset>
+        </encoder>
+    </appender>
+
     <springProfile name="dev">
         <root level="INFO">
             <appender-ref ref="CONSOLE"/>
