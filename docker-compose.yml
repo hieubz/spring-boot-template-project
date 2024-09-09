@@ -75,6 +75,13 @@ services:
       - esnet
     ports:
       - 9200:9200
+  zipkin:
+    container_name: zipkin-server
+    image: openzipkin/zipkin:latest
+    ports:
+      - 9411:9411
+    environment:
+      - STORAGE_TYPE=mem # update env if you use external databases
 volumes:
   mysql-data:
   redis-data:
