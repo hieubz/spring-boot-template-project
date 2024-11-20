@@ -66,6 +66,7 @@ And we have a main flow as shown below:
 - [x] Generate and send emails
 - [x] Rate Limiter with Bucket4j
 - [x] Circuit Breaker, Rate Limiter with Resilience4j
+- [x] Distributed Tracing with Micrometer and Zipkin
 
 #### Datasource
 - [x] Multiple DataSource Configuration
