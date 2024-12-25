@@ -3,6 +3,7 @@ package com.example.demo.application.filter;
 import com.google.common.base.Stopwatch;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.MDC;
+import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.MediaType;
 import org.springframework.stereotype.Component;
@@ -23,7 +24,7 @@ import java.util.stream.Stream;
 
 @Slf4j
 @Component
-@Order(1)
+@Order(Ordered.HIGHEST_PRECEDENCE + 1)
 public class RequestAndResponseLogFilter extends OncePerRequestFilter {
 
   private static final List<MediaType> VISIBLE_TYPES =

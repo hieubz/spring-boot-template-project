@@ -1,10 +1,11 @@
 package com.example.demo.infrastructure.config.auth;
 
+import com.example.demo.application.filter.RequestAndResponseLogFilter;
 import com.example.demo.application.filter.VerifyFixedTokenFilter;
 import com.example.demo.application.filter.VerifyJwtTokenFilter;
 import java.util.Arrays;
 import java.util.List;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -17,6 +18,7 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.logout.LogoutFilter;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
@@ -24,6 +26,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 @Configuration
 @EnableWebSecurity
 @EnableMethodSecurity
+@RequiredArgsConstructor
 public class WebSecurityConfig {
 
   @Value("${spring.main.web-application-type}")
@@ -41,7 +44,7 @@ public class WebSecurityConfig {
 
   private static final String WEB_APPLICATION_TYPE = "servlet";
 
-  @Autowired private AuthEntryPointJwt authEntryPointJwt;
+  private final AuthEntryPointJwt authEntryPointJwt;
 
   @Bean
   public VerifyJwtTokenFilter jwtAuthenticationFilter() {
@@ -70,8 +73,10 @@ public class WebSecurityConfig {
                   .anyRequest().authenticated());
       http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
       http.exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPointJwt));
-      http.addFilterBefore(fixedTokenAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-      http.addFilterBefore(jwtAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+
+      // Best practices: Authentication filters should be placed after LogoutFilter
+      http.addFilterAfter(fixedTokenAuthenticationFilter(), LogoutFilter.class);
+      http.addFilterAfter(jwtAuthenticationFilter(), LogoutFilter.class);
     }
     return http.build();
   }
