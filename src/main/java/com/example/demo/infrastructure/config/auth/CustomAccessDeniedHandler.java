@@ -5,33 +5,31 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.web.AuthenticationEntryPoint;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
 
 @Component
 @RequiredArgsConstructor
-@Slf4j
-public class AuthEntryPointJwt implements AuthenticationEntryPoint {
+public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
   private final ObjectMapper mapper;
 
   @Override
-  public void commence(
+  public void handle(
       HttpServletRequest request,
       HttpServletResponse response,
-      AuthenticationException authException)
+      AccessDeniedException accessDeniedException)
       throws IOException {
     ErrorResponse errorResponse =
         new ErrorResponse(
-            HttpServletResponse.SC_UNAUTHORIZED,
-            "Unauthorized",
-            authException.getMessage(),
+            HttpServletResponse.SC_FORBIDDEN,
+            "Forbidden",
+            "You do not have permission to access this resource.",
             request.getRequestURI());
     response.setContentType("application/json");
     response.setCharacterEncoding("UTF-8");
-    response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+    response.setStatus(HttpServletResponse.SC_FORBIDDEN);
     mapper.writeValue(response.getWriter(), errorResponse);
   }
 }

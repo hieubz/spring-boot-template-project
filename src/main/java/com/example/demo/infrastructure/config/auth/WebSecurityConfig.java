@@ -46,6 +46,8 @@ public class WebSecurityConfig {
 
   private final AuthEntryPointJwt authEntryPointJwt;
 
+  private final CustomAccessDeniedHandler accessDeniedHandler;
+
   @Bean
   public VerifyJwtTokenFilter jwtAuthenticationFilter() {
     return new VerifyJwtTokenFilter();
@@ -72,9 +74,14 @@ public class WebSecurityConfig {
                   .requestMatchers("/api/db/**").hasAnyRole("ADMIN", "DBA")
                   .anyRequest().authenticated());
       http.sessionManagement(s -> s.sessionCreationPolicy(SessionCreationPolicy.STATELESS));
-      http.exceptionHandling(ex -> ex.authenticationEntryPoint(authEntryPointJwt));
+      http.exceptionHandling(
+          ex ->
+              ex.authenticationEntryPoint(authEntryPointJwt)
+                  .accessDeniedHandler(accessDeniedHandler));
 
-      // Best practices: Authentication filters should be placed after LogoutFilter
+      // Best practices: AuthN filters should be placed after LogoutFilter
+      // AuthZ filters should be placed after AnonymousAuthenticationFilter, the last authentication
+      // filter in the chain
       http.addFilterAfter(fixedTokenAuthenticationFilter(), LogoutFilter.class);
       http.addFilterAfter(jwtAuthenticationFilter(), LogoutFilter.class);
     }
