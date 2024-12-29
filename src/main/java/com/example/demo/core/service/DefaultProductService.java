@@ -8,6 +8,7 @@ import com.example.demo.core.domain.Product;
 import com.example.demo.core.domain.ProductStatus;
 import com.example.demo.infrastructure.locks.ProductMongoLocker;
 import com.example.demo.infrastructure.locks.ProductRedisLocker;
+import com.example.demo.shared.annotation.TrackExecutionTime;
 import com.example.demo.shared.exception.ConcurrentProcessingException;
 import com.example.demo.shared.exception.EmptyRequestException;
 import com.example.demo.shared.exception.ProductNotFoundException;
@@ -63,6 +64,7 @@ public class DefaultProductService implements ProductService {
   }
 
   @Override
+  @TrackExecutionTime
   public Product loadProductDetails(Long id) throws ProductNotFoundException {
     log.info("> ProductService.loadProductDetails id = {}", id);
     return this.productAdapter.loadProductDetails(id);
